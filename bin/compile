@@ -4,8 +4,6 @@ set -e            # fail fast
 set -o pipefail   # don't ignore exit codes when piping output
 # set -x          # enable debugging
 
-status "Gooby plz"
-
 # Configure directories
 build_dir=$1
 cache_dir=$2
@@ -24,6 +22,8 @@ semver_range=$(cat $build_dir/package.json | $bp_dir/vendor/jq -r .engines.node)
 
 # Resolve node version using semver.io
 node_version=$(curl --silent --get --data-urlencode "range=${semver_range}" https://semver.io/node/resolve)
+
+status "Gooby plz"
 
 # Recommend using semver ranges in a safe manner
 if [ "$semver_range" == "null" ]; then
